@@ -1,0 +1,480 @@
+# http://172.25.24.222/api/v2/api_docs/demo?api_key=73455d5d4f89c050b2b0dda83e56b854e51e221553a4faee216b6465d264584d
+# http://172.25.24.222/df-api-docs-ui/dist/images/DreamFactory-icon-inverse.png
+openapi: 3.0.1
+servers:
+  - url: http://172.25.24.222:8080
+    description: Default server
+  - url: http://apisandbox:8080
+    description: API Sandbox
+info:
+  description:
+    $ref: './description.md'
+
+  #     <SecurityDefinitions />
+
+  version: 1.0.0
+  title: Demo API Sandbox
+
+  #   termsOfService: 'http://swagger.io/terms/'
+  contact:
+    name: API Support
+    email: apiteam@swagger.io
+    url: https://github.com/Redocly/redoc
+  x-logo:
+    url: 'https://firstrate.com/assets/images/logos/fr-logo.png'
+    altText: First Rate logo
+  # license:
+  #   name: Apache 2.0
+  #   url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  #   identifier: Apache 2.0
+# externalDocs:
+#   description: Find out how to create Github repo for your OpenAPI spec.
+#   url: 'https://github.com/Rebilly/generator-openapi-repo'
+# tags:
+#   - name: Authentication
+#     description: 'Example authentication operations.'
+#   - name: Reports
+#     description: 'Reports on your Portfolio.'
+# x-tagGroups:
+#   - name: General
+#     tags:
+#       - Authentication
+#       - Reports
+security:
+  - api_key: []
+paths:
+  /reports/composite-allocation:
+    post:
+      summary: Composite constituent allocation and market values
+      description: This report returns market values, accruals, and allocations for the specified composite and its underlying constituents.
+      operationId: compositeAllocation
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompositeAllocationResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/CompositeAllocationRequest'
+  /reports/composite-performance:
+    post:
+      summary: Composite constituent performance and allocation
+      description: This report lists composite and constituent performance and allocation, as well as inception dates for the composite and its constituents.
+      operationId: compositePerformance
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompositePerformanceResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/CompositePerformanceRequest'
+  /reports/demographics:
+    post:
+      summary: Portfolio Demographics
+      description: This report lists values for requested portfolio demographics fields as of the specified date.
+      operationId: demographics
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemographicsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/DemographicsRequest'
+  /reports/fixed-income:
+    post:
+      summary: Fixed Income Details
+      description: This report displays characteristic averages of fixed income securities including coupons, yields, maturities, durations, in addition to market values, accruals and other values.
+      operationId: fixedIncome
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixedIncomeResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/FixedIncomeRequest'
+  /reports/holdings:
+    post:
+      summary: Holdings Listing
+      description: Lists the asset-level financial data as of the specified date.  Data returnd includes asset names, ids, units, accuals and market values.
+      operationId: holdings
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HoldingsResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/HoldingsRequest'
+  /reports/investment-summary:
+    post:
+      summary: Investment Summary
+      description: Financial information for the selected sectors and period.  Data points include beginning portfolio value, contributions/withdrawals, fees, income, and
+      operationId: investmentSummary
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvestmentSummaryResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/InvestmentSummaryRequest'
+  /reports/largest-holdings:
+    post:
+      summary: Largest Holdings
+      description: Lists the largest assets by market value on the specified date.
+      operationId: largestHoldings
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LargestHoldingsResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/LargestHoldingsRequest'
+  /reports/risk-statistics:
+    post:
+      summary: Risk Statistics
+      description: This report shows risk measurements for the selected portfolios. The report includes risk measurements for a model sector or category compared with a model benchmark.
+      operationId: riskStatistics
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RiskStatisticsResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/RiskStatisticsRequest'
+  /reports/sector-allocation:
+    post:
+      summary: Sector Allocation
+      description: This report lists the portfolio's market values and allocations by asset class and/or sector.
+      operationId: sectorAllocation
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorAllocationResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/SectorAllocationRequest'
+  /reports/sector-inception:
+    post:
+      summary: Sector Inception SPP
+      description: The Sector Inception Selected Period Performance report lists the market values and rates of return for selected sectors and benchmarks for the specified periods, including inception-to-date performance for sectors and benchmarks.
+      operationId: sectorInception
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SectorInceptionResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/SectorInceptionRequest'
+  /reports/top-performers:
+    post:
+      summary: Top Performing Assets
+      description: This report lists the top holdings for the selected portfolio or composite for the specified date. Assets mapped to non-performing sectors are excluded.
+      operationId: topPerformers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopPerformersResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/TopPerformersRequest'
+  /reports/transactions:
+    post:
+      summary: Transaction listing
+      description: This report shows asset-level transaction details for individual portfolios or composite constituents.
+      operationId: transactions
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+        '402':
+          $ref: '#/components/responses/RequestFailed'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      security:
+        - api_key: []
+      requestBody:
+        $ref: '#/components/requestBodies/TransactionsRequest'
+components:
+  schemas:
+    CompositeAllocationRequest:
+      $ref: components/schemas/CompositeAllocationRequest.yaml
+    CompositeAllocationResponse:
+      $ref: components/schemas/CompositeAllocationResponse.yaml
+    CompositePerformanceRequest:
+      $ref: components/schemas/CompositePerformanceRequest.yaml
+    CompositePerformanceResponse:
+      $ref: components/schemas/CompositePerformanceResponse.yaml
+    DemographicsRequest:
+      $ref: components/schemas/DemographicsRequest.yaml
+    DemographicsResponse:
+      $ref: components/schemas/DemographicsResponse.yaml
+    FixedIncomeRequest:
+      $ref: components/schemas/FixedIncomeRequest.yaml
+    FixedIncomeResponse:
+      $ref: components/schemas/FixedIncomeResponse.yaml
+    HoldingsRequest:
+      $ref: components/schemas/HoldingsRequest.yaml
+    HoldingsResponse:
+      $ref: components/schemas/HoldingsResponse.yaml
+    InvestmentSummaryRequest:
+      $ref: components/schemas/InvestmentSummaryRequest.yaml
+    InvestmentSummaryResponse:
+      $ref: components/schemas/InvestmentSummaryResponse.yaml
+    LargestHoldingsRequest:
+      $ref: components/schemas/LargestHoldingsRequest.yaml
+    LargestHoldingsResponse:
+      $ref: components/schemas/LargestHoldingsResponse.yaml
+    RiskStatisticsRequest:
+      $ref: components/schemas/RiskStatisticsRequest.yaml
+    RiskStatisticsResponse:
+      $ref: components/schemas/RiskStatisticsResponse.yaml
+    SectorAllocationRequest:
+      $ref: components/schemas/SectorAllocationRequest.yaml
+    SectorAllocationResponse:
+      $ref: components/schemas/SectorAllocationResponse.yaml
+    SectorInceptionRequest:
+      $ref: components/schemas/SectorInceptionRequest.yaml
+    SectorInceptionResponse:
+      $ref: components/schemas/SectorInceptionResponse.yaml
+    TopPerformersRequest:
+      $ref: components/schemas/TopPerformersRequest.yaml
+    TopPerformersResponse:
+      $ref: components/schemas/TopPerformersResponse.yaml
+    TransactionsRequest:
+      $ref: components/schemas/TransactionsRequest.yaml
+    TransactionsResponse:
+      $ref: components/schemas/TransactionsResponse.yaml
+    BadRequest:
+      $ref: components/schemas/outputs/BadRequest.yaml
+    ErrorModel400:
+      $ref: components/schemas/outputs/Errors400.yaml
+    # ExtendedErrorModel:
+    #   allOf: # Combines the ErrorModel400 and the inline model
+    #     - $ref: '#/components/schemas/ErrorModel400'
+    #     - type: object
+    #       required:
+    #         - rootCause
+    #       properties:
+    #         rootCause:
+    #           type: string
+  securitySchemes:
+    api_key:
+      description: |
+        This Demo API uses a static API key for authorization. 
+        An API key is a token that a client provides when making API calls. The key can be sent in the query string:
+      type: apiKey
+      in: query
+      name: api_key
+  requestBodies:
+    CompositeAllocationRequest:
+      description: A CompositeAllocationRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompositeAllocationRequest'
+    CompositePerformanceRequest:
+      description: A CompositePerformanceRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompositePerformanceRequest'
+    DemographicsRequest:
+      description: A DemographicsRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DemographicsRequest'
+    FixedIncomeRequest:
+      description: A JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FixedIncomeRequest'
+    HoldingsRequest:
+      description: A FixedIncomeRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HoldingsRequest'
+    InvestmentSummaryRequest:
+      description: A InvestmentSummaryRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InvestmentSummaryRequest'
+    LargestHoldingsRequest:
+      description: A LargestHoldingsRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LargestHoldingsRequest'
+    RiskStatisticsRequest:
+      description: A RiskStatisticsRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RiskStatisticsRequest'
+    SectorAllocationRequest:
+      description: A SectorAllocationRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SectorAllocationRequest'
+    SectorInceptionRequest:
+      description: A SectorInceptionRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SectorInceptionRequest'
+    TopPerformersRequest:
+      description: A TopPerformersRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TopPerformersRequest'
+    TransactionsRequest:
+      description: A TransactionsRequest JSON object containing the request parameters.
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionsRequest'
+  responses:
+    BadRequest:
+      description: 400 The request was unacceptable, often due to missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequest'
+    Unauthorized:
+      description: 401 Authentication information is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel400'
+    RequestFailed:
+      description: 402 The parameters were valid but the request failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel400'
+    Forbidden:
+      description: 403	Forbidden	The API key doesn’t have permissions to perform the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel400'
+    NotFound:
+      description: 404 The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel400'
+
+      # <code>200</code> <strong>OK         	    </strong>Everything worked as expected.
+      # <code>400</code> <strong>Bad Request	    </strong>The request was unacceptable, often due to missing a required parameter.
+      # <code>401</code> <strong>Unauthorized	    </strong>No valid API key provided.
+      # <code>402</code> <strong>Request          </strong>Failed	The parameters were valid but the request failed.
+      # <code>403</code> <strong>Forbidden	      </strong>The API key doesn’t have permissions to perform the request.
+      # <code>404</code> <strong>Not Found        </strong>The requested resource doesn’t exist.
+      # <code>409</code> <strong>Conflict         </strong>The request conflicts with another request (perhaps due to using the same idempotent key).
+      # <code>429</code> <strong>Too Many Notes!  </strong>Too many requests hit the API too quickly. We recommend an exponential backoff of your requests.
+      # 500, 502, 503, 504	Server Errors	Something went wrong on our end. (These are not rare.)
