@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo API</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <div id="redoc-container"></div>
@@ -28,7 +29,15 @@
     // initTry(`https://petstore.swagger.io/v2/swagger.json`)
     initTry({
       openApi: `openapi.json`,
-      redocOptions: {scrollYOffset: 50},
+      tryText: 'Try it!',
+      redocOptions: {
+        enableConsole: true,
+        scrollYOffset: 50,
+	      expandResponses: '200',
+        expandSingleSchemaField: true,
+	      schemaExpansionLevel: 3,
+        theme:'{"sidebar": {"backgroundColor":"lightblue"}}'
+      },
       ...window.initTryOptions,
     })
   </script>

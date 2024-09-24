@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo API</title>
+</head>
+<body>
+  <div id="redoc-container"></div>
+
+  <script type="text/javascript" src="https://cdn.jsdeliver.net/npm/redoc-try-it-out/dist/try-it-out.min.js"></script>
+  <script>
+    // initTry(`https://petstore.swagger.io/v2/swagger.json`)
+    RedocTryItOut.init(
+      `openapi.json`,
+      {scrollYOffset: 50,	expandResponses: 200,	jsonSampleExpandLevel: 3 },
+      document.getElementById("redoc-container")
+    );
+  </script>
+</body>
+</html>

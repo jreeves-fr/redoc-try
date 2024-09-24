@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "build": "babel try.js -d dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "sudo cp -R  dist/* /var/lib/redoc/."
   },
   "repository": {
     "type": "git",
